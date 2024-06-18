@@ -1,0 +1,19 @@
+{
+  "name": "em2024",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node-fetch": "^2.6.11",
+    "dotenv": "^16.4.5",
+    "fetch-cookie": "^3.0.1",
+    "node-html-parser": "^6.1.13",
+    "tough-cookie": "^4.1.4"
+  },
+  "type": "module"
+}
