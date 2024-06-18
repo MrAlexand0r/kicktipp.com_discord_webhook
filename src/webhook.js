@@ -9,7 +9,7 @@ export class Webhook {
 
     const now = new Date();
     const today = leaderboard.filter((l) => l.date > now);
-
+    console.log("listeing for " + today.length + " games");
     today.forEach((game) => {
       const timeLeft = game.date - now + 10000; // wait 10 seconds before refreshing
 
@@ -21,7 +21,7 @@ export class Webhook {
         // console.log(updatedLeaderboard);
 
         const webhookMsg = this.generateWebhookMessageFromGame(updatedGame);
-        await sendWebhookMessage(webhookMsg);
+        await this.sendWebhookMessage(webhookMsg);
       }, timeLeft);
 
       Webhook.timeouts.push(timeout);
