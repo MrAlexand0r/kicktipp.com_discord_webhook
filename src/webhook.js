@@ -32,6 +32,25 @@ export class Webhook {
     const webhookMsg = {
       content: `⚽ **${updatedGame.home}** - **${updatedGame.away}** Predictions ⚽`,
       embeds: [],
+      components: [
+        {
+          "type": 2,
+          "components": [
+            {
+              "type": 2,
+              "label": "Leaderboard",
+              "style": 5,
+              "url": process.env.KICKTIPP_BASEURL + "/leaderboard"
+            },
+            {
+              "type": 2,
+              "label": "Prediction Center",
+              "style": 5,
+              "url": process.env.KICKTIPP_BASEURL + "/predict"
+            }
+          ]
+        },
+      ]
     };
     const embed = {
       title: "Home  Away (●'◡'●)",
