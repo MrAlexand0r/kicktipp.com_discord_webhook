@@ -23,3 +23,10 @@ function refreshSubsscriptionsTomorrowMorning() {
     refreshSubsscriptionsTomorrowMorning();
   }, morning - now);
 }
+
+if (process.argv[2] === "test") {
+  const testIndex = parseInt(process.argv[3]);
+  if (!isNaN(testIndex)) {
+    Webhook.triggerManually(testIndex);
+  }
+}
