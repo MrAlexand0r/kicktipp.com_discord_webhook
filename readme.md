@@ -2,10 +2,12 @@
 
 This project implements a Kicktipp API that fetches leaderboard data and sends updates to a discord webhook. It is designed to periodically refresh subscriptions and notify users about game predictions as soon as the game starts.
 
+
 ## Table of Contents
 
 - [Kicktipp Webhook Integration](#kicktipp-webhook-integration)
   - [Table of Contents](#table-of-contents)
+  - [⚠️ Important Notice](#️-important-notice)
   - [Installation](#installation)
   - [Configuration](#configuration)
   - [Usage](#usage)
@@ -14,6 +16,10 @@ This project implements a Kicktipp API that fetches leaderboard data and sends u
   - [Project Structure](#project-structure)
   - [Contributing](#contributing)
   - [License](#license)
+
+## ⚠️ Important Notice
+
+This project was specifically developed for the **UEFA Euro 2024**. Future updates are not planned.
 
 ## Installation
 
