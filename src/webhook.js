@@ -32,25 +32,22 @@ export class Webhook {
     const webhookMsg = {
       content: `⚽ **${updatedGame.home}** - **${updatedGame.away}** Predictions ⚽`,
       embeds: [],
-      components: [
-        {
-          "type": 2,
-          "components": [
-            {
-              "type": 2,
-              "label": "Leaderboard",
-              "style": 5,
-              "url": process.env.KICKTIPP_BASEURL + "/leaderboard"
-            },
-            {
-              "type": 2,
-              "label": "Prediction Center",
-              "style": 5,
-              "url": process.env.KICKTIPP_BASEURL + "/predict"
-            }
-          ]
-        },
-      ]
+      components: [{
+        "type": 2,
+        "components": [{
+            "type": 2,
+            "label": "Leaderboard",
+            "style": 5,
+            "url": process.env.KICKTIPP_BASEURL + "/leaderboard"
+          },
+          {
+            "type": 2,
+            "label": "Prediction Center",
+            "style": 5,
+            "url": process.env.KICKTIPP_BASEURL + "/predict"
+          }
+        ]
+      }, ]
     };
     const embed = {
       title: "Home  Away (●'◡'●)",
@@ -58,8 +55,11 @@ export class Webhook {
       color: "14177041",
     };
     updatedGame.bets.forEach(
-      (bet) =>
-        (embed.description += `\`${bet.bet.home.toString()}   -   ${bet.bet.away.toString()}\`  ${getDiscordId(bet.user)} \n`),
+      (bet) => {
+        if (!!bet.bet) {
+          embed.description += `\`${bet.bet.home.toString()}   -   ${bet.bet.away.toString()}\`  ${getDiscordId(bet.user)} \n`;
+        }
+      }
     );
     webhookMsg.embeds.push(embed);
     return webhookMsg;
@@ -68,7 +68,9 @@ export class Webhook {
   static async sendWebhookMessage(message) {
     const response = await fetch(process.env.WEBHOOK_URL, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json"
+      },
       body: JSON.stringify(message),
     });
 
