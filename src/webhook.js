@@ -17,7 +17,7 @@ export class Webhook {
     const today = leaderboard.filter((l) => l.date > now);
     console.log("listening for " + today.length + " games");
     today.forEach((game) => {
-      const timeLeft = game.date - now + 10000; // wait 10 seconds before refreshing
+      const timeLeft = game.date - now + 60_000; // wait 10 seconds before refreshing
 
       const timeout = setTimeout(async () => {
         const updatedLeaderboard = await Kicktipp.leaderboard();
