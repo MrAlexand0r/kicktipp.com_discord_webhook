@@ -79,6 +79,11 @@ Start the application:
 
 Contributions are welcome! Please open an issue or submit a pull request.
 
+## Testing
+
+For testing if the _Configuration_ was successful, you can start the application with `node index.js test <index>`, index being which game of the current leaderboard to select. 
+It will start the application normally, but will also immediately try to send a webhook to discord with the selected game info.
+
 ## License
 
 This project is licensed under the GPL License.

@@ -4,12 +4,18 @@ import userIdMap from "./userIdMap.json" assert { type: "json" };
 export class Webhook {
   static timeouts = [];
 
+  static async triggerManually(index) {
+  	const leaderboard = await Kicktipp.leaderboard();
+  	const webhookMsg = this.generateWebhookMessageFromGame(leaderboard[index]);
+    await this.sendWebhookMessage(webhookMsg);
+  }
+
   static async subscribeToLeaderboard() {
     const leaderboard = await Kicktipp.leaderboard();
 
     const now = new Date();
     const today = leaderboard.filter((l) => l.date > now);
-    console.log("listeing for " + today.length + " games");
+    console.log("listening for " + today.length + " games");
     today.forEach((game) => {
       const timeLeft = game.date - now + 10000; // wait 10 seconds before refreshing
 
@@ -40,7 +46,7 @@ export class Webhook {
       ]
     };
     const embed = {
-      title: "Home  Away (●'◡'●)",
+      title: "Home - Away (●'◡'●)",
       description: "",
       color: "14177041",
     };
@@ -66,6 +72,9 @@ export class Webhook {
     });
 
     console.log(`Webhook Result: ${response.status}`);
+    if (response.status !== 200) {
+    	console.log(await response.json());
+    }
   }
 
   static clearTimeouts() {
