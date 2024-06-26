@@ -72,8 +72,8 @@ export class Webhook {
     });
 
     console.log(`Webhook Result: ${response.status}`);
-    if (response.status !== 200) {
-    	console.log(await response.json());
+    if (!(response.status + "").startsWith("2")) {
+    	console.log(await response.text());
     }
   }
 
