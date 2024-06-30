@@ -157,14 +157,19 @@ function parseSpielplanSpieleTable(table) {
   tr.forEach((row, i) => {
     const cols = row.querySelectorAll("td");
 
-    result.push({
+    const baseObject = {
       index: i,
       date: new Date(cols[0].innerText),
       home: cols[1].innerText,
       away: cols[2].innerText,
-      group: cols[3].innerText,
-      result: extractValues(cols[4].innerText),
-    });
+      result: extractValues(cols[cols.length - 1].innerText),
+    };
+    
+    if (cols.length === 5) {
+      baseObject.group = cols[3].innerText;
+    }
+
+    result.push(baseObject);
   });
 
   return result;
