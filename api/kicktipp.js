@@ -75,6 +75,7 @@ export class Kicktipp {
       const playing =
         headerboxes[0].innerHTML + " - " + headerboxes[1].innerHTML;
       spieleResult[i - 3]["shorthand"] = playing;
+      spieleResult[i - 3]["live"] = !!headerboxes[2] && headerboxes[2].classNames.includes('kicktipp-liveergebnis');
     }
     const tr = body.querySelectorAll("tr");
 
