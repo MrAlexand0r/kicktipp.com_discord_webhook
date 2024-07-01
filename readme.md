@@ -15,6 +15,7 @@ This project implements a Kicktipp API that fetches leaderboard data and sends u
   - [Missing features:](#missing-features)
   - [Project Structure](#project-structure)
   - [Contributing](#contributing)
+  - [Testing](#testing)
   - [License](#license)
 
 ## ⚠️ Important Notice
@@ -30,6 +31,9 @@ This project was specifically developed for the **UEFA Euro 2024**. Future updat
 2. Install dependencies:
 
 `npm install`
+
+
+Alternatively use nixpacks. 
 
 ## Configuration
 
