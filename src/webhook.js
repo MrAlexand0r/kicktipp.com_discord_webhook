@@ -17,7 +17,7 @@ export class Webhook {
     const today = leaderboard.filter((l) => l.date > now);
     console.log("listening for " + today.length + " games");
     today.forEach((game) => {
-      const timeLeft = game.date - now + 60_000; // wait 10 seconds before refreshing
+      const timeLeft = game.date - now + 10_000; // wait 10 seconds before refreshing
 
       const timeout = setTimeout(async () => {
         const updatedLeaderboard = await Kicktipp.leaderboard();
@@ -52,7 +52,7 @@ export class Webhook {
     };
     updatedGame.bets.forEach(
       (bet) => {
-        if (!!bet.bet && !!bet.bet.home && !!bet.bet.away) {
+        if (!!bet.bet) {
           embed.description += `\`${bet.bet.home.toString()}   -   ${bet.bet.away.toString()}\`  ${getDiscordId(bet.user)} \n`;
         }
       }
@@ -72,8 +72,8 @@ export class Webhook {
     });
 
     console.log(`Webhook Result: ${response.status}`);
-    if (response.status !== 200) {
-    	console.log(await response.json());
+    if (!(response.status + "").startsWith("2")) {
+    	console.log(await response.text());
     }
   }
 

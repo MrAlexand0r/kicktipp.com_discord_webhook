@@ -75,6 +75,7 @@ export class Kicktipp {
       const playing =
         headerboxes[0].innerHTML + " - " + headerboxes[1].innerHTML;
       spieleResult[i - 3]["shorthand"] = playing;
+      spieleResult[i - 3]["live"] = !!headerboxes[2] && headerboxes[2].classNames.includes('kicktipp-liveergebnis');
     }
     const tr = body.querySelectorAll("tr");
 
@@ -157,14 +158,19 @@ function parseSpielplanSpieleTable(table) {
   tr.forEach((row, i) => {
     const cols = row.querySelectorAll("td");
 
-    result.push({
+    const baseObject = {
       index: i,
       date: new Date(cols[0].innerText),
       home: cols[1].innerText,
       away: cols[2].innerText,
-      group: cols[3].innerText,
-      result: extractValues(cols[4].innerText),
-    });
+      result: extractValues(cols[cols.length - 1].innerText),
+    };
+    
+    if (cols.length === 5) {
+      baseObject.group = cols[3].innerText;
+    }
+
+    result.push(baseObject);
   });
 
   return result;
