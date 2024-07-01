@@ -8,25 +8,25 @@ await Kicktipp.init({
   password: process.env.KICKTIPP_PASSWORD,
 });
 
-Webhook.subscribeToLeaderboard();
-refreshSubsscriptionsTomorrowMorning();
-
-function refreshSubsscriptionsTomorrowMorning() {
-  const now = new Date();
-  const morning = new Date();
-  morning.setDate(now.getDate() + 1);
-  morning.setHours(5);
-
-  setTimeout(() => {
-    Webhook.clearTimeouts();
-    Webhook.subscribeToLeaderboard();
-    refreshSubsscriptionsTomorrowMorning();
-  }, morning - now);
-}
-
 if (process.argv[2] === "test") {
   const testIndex = parseInt(process.argv[3]);
   if (!isNaN(testIndex)) {
     Webhook.triggerManually(testIndex);
+  }
+} else {
+  Webhook.subscribeToLeaderboard();
+  refreshSubsscriptionsTomorrowMorning();
+
+  function refreshSubsscriptionsTomorrowMorning() {
+    const now = new Date();
+    const morning = new Date();
+    morning.setDate(now.getDate() + 1);
+    morning.setHours(5);
+
+    setTimeout(() => {
+      Webhook.clearTimeouts();
+      Webhook.subscribeToLeaderboard();
+      refreshSubsscriptionsTomorrowMorning();
+    }, morning - now);
   }
 }

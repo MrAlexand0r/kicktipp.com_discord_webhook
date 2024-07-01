@@ -5,8 +5,9 @@ export class Webhook {
   static timeouts = [];
 
   static async triggerManually(index) {
-  	const leaderboard = await Kicktipp.leaderboard();
-  	const webhookMsg = this.generateWebhookMessageFromGame(leaderboard[index]);
+    const leaderboard = await Kicktipp.leaderboard();
+    const webhookMsg = this.generateWebhookMessageFromGame(leaderboard[index]);
+    console.log(webhookMsg);
     await this.sendWebhookMessage(webhookMsg);
   }
 
@@ -24,7 +25,6 @@ export class Webhook {
         const updatedGame = updatedLeaderboard[game.index];
 
         console.log(JSON.stringify(updatedGame));
-        // console.log(updatedLeaderboard);
 
         const webhookMsg = this.generateWebhookMessageFromGame(updatedGame);
         await this.sendWebhookMessage(webhookMsg);
@@ -39,24 +39,22 @@ export class Webhook {
       content: `⚽ **${updatedGame.home}** - **${updatedGame.away}** Predictions ⚽`,
       embeds: [
         {
-          "description": `[Leaderboard](${process.env.KICKTIPP_BASEURL}/leaderboard) | [Prediction Center](${process.env.KICKTIPP_BASEURL}/leaderboard)`,
-          "fields": [],
-          "title": "🔗"
-        }
-      ]
+          description: `[Leaderboard](${process.env.KICKTIPP_BASEURL}/leaderboard) | [Prediction Center](${process.env.KICKTIPP_BASEURL}/leaderboard)`,
+          fields: [],
+          title: "🔗",
+        },
+      ],
     };
     const embed = {
       title: "Home - Away (●'◡'●)",
       description: "",
       color: "14177041",
     };
-    updatedGame.bets.forEach(
-      (bet) => {
-        if (!!bet.bet) {
-          embed.description += `\`${bet.bet.home.toString()}   -   ${bet.bet.away.toString()}\`  ${getDiscordId(bet.user)} \n`;
-        }
+    updatedGame.bets.forEach((bet) => {
+      if (!!bet.bet) {
+        embed.description += `\`${bet.bet.home.toString()}   -   ${bet.bet.away.toString()}\`  ${getDiscordId(bet.user)} \n`;
       }
-    );
+    });
     webhookMsg.embeds.unshift(embed);
     console.log(JSON.stringify(embed));
     return webhookMsg;
@@ -66,14 +64,14 @@ export class Webhook {
     const response = await fetch(process.env.WEBHOOK_URL, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(message),
     });
 
     console.log(`Webhook Result: ${response.status}`);
     if (!(response.status + "").startsWith("2")) {
-    	console.log(await response.text());
+      console.log(await response.text());
     }
   }
 
