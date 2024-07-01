@@ -33,7 +33,7 @@ This project was specifically developed for the **UEFA Euro 2024**. Future updat
 `npm install`
 
 
-Alternatively use nixpacks.
+Alternatively use nixpacks. 
 
 ## Configuration
 
