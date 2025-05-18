@@ -22,6 +22,10 @@ This project implements a Kicktipp API that fetches leaderboard data and sends u
 
 This project was specifically developed for the **UEFA Euro 2024**. Future updates are not planned.
 
+## Webhook Message Example
+![image](https://github.com/user-attachments/assets/e6ff28a0-ccb2-454a-9b71-8e2487fb5957)
+
+
 ## Installation
 
 1. Clone the repository:
